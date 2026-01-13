@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Superheat H1 – Aquecimento de água com reaproveitamento energético</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Superheat H1: sistema de aquecimento de água que reaproveita o calor gerado por computação para produzir água quente útil."
+  />
+  <style>
+    :root {
+      --bg: #050609;
+      --bg-alt: #0c0f16;
+      --accent: #ff3b30;
+      --accent-soft: rgba(255, 59, 48, 0.12);
+      --text: #f7f7f7;
+      --muted: #a3a8b8;
+      --border: #252837;
+      --card: #101320;
+      --highlight: #ffcc00;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.6);
+      --max-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #15192a 0, #050609 55%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px 40px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 0, #ff9f0a 0, #ff3b30 35%, #111 100%);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 14px 30px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border-radius: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.32);
+      border-top-color: rgba(255, 255, 255, 0.8);
+      transform: rotate(-18deg);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .header-pill {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(10, 10, 22, 0.85);
+      color: var(--muted);
+    }
+
+    .header-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.2);
+    }
+
+    main {
+      background: linear-gradient(
+        135deg,
+        rgba(15, 18, 30, 0.96),
+        rgba(7, 9, 16, 0.98)
+      );
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 22px 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(
+        circle at 14% 0,
+        rgba(255, 204, 0, 0.16) 0,
+        transparent 54%
+      );
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .main-left,
+    .main-right {
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(7, 10, 24, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .kicker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--highlight);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3vw, 2.4rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin-bottom: 18px;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #e4e6f0;
+      max-width: 36rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #ff453a, #ff9f0a);
+      color: #050609;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        filter 0.12s ease;
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.05rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.8);
+      filter: brightness(1.03);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+      filter: brightness(0.98);
+    }
+
+    .cta-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .separator {
+      height: 1px;
+      border: none;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.16),
+        transparent
+      );
+      margin: 18px 0 16px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      font-size: 0.83rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .section-label span.icon {
+      font-size: 0.9rem;
+    }
+
+    .section-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      color: #d3d6e5;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #d3d6e5;
+      margin-bottom: 4px;
+    }
+
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-top: 7px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .main-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: radial-gradient(
+          circle at -10% 0,
+          rgba(255, 204, 0, 0.08),
+          transparent 58%
+        ),
+        linear-gradient(135deg, #0b0f1a, #05060b);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 14px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(
+        circle at 120% 120%,
+        rgba(255, 59, 48, 0.25),
+        transparent 60%
+      );
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-title-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(3, 5, 12, 0.9);
+    }
+
+    .card-body {
+      position: relative;
+      z-index: 1;
+      font-size: 0.86rem;
+      color: #d8dbee;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 0.82rem;
+    }
+
+    .table tr + tr {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .table th,
+    .table td {
+      padding: 6px 0;
+      text-align: left;
+    }
+
+    .table th {
+      font-weight: 500;
+      color: var(--muted);
+      width: 54%;
+      padding-right: 12px;
+    }
+
+    .table td {
+      font-weight: 500;
+      color: #f4f4f4;
+    }
+
+    .table-em {
+      color: var(--highlight);
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.9rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e4e6f0;
+    }
+
+    .contact-item span.icon {
+      font-size: 1.1rem;
+    }
+
+    .legal {
+      font-size: 0.76rem;
+      color: #9b9fb1;
+      line-height: 1.5;
+    }
+
+    .footer-small {
+      margin-top: 12px;
+      font-size: 0.74rem;
+      color: rgba(158, 163, 186, 0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small span {
+      opacity: 0.8;
+    }
+
+    /* Responsivo */
+    @media (max-width: 840px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px 18px 18px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        padding: 20px 12px 26px;
+      }
+
+      main {
+        border-radius: 18px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-small {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div class="brand-text">
+            <div class="brand-name">Superheat H1</div>
+            <div class="brand-tagline">Aquecimento de água com reaproveitamento energético</div>
+          </div>
+        </div>
+        <div class="header-pill">
+          <span class="header-pill-dot"></span>
+          <span>Projeto experimental de eficiência energética</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="main-left">
+          <div class="kicker">
+            <span class="kicker-dot"></span>
+            <span>Reaproveitamento de calor da computação</span>
+          </div>
+
+          <h1>Superheat H1</h1>
+          <p class="subtitle">
+            Aquecimento de água com reaproveitamento energético, utilizando o calor gerado por computação associada à mineração de Bitcoin.
+          </p>
+
+          <p class="description">
+            O Superheat H1 demonstra uma nova abordagem à eficiência energética: utilizar o calor gerado por computação para produzir água quente útil, reduzindo desperdício energético.
+          </p>
+
+          <div class="cta-row">
+            <a href="#contacto">
+              <button class="btn-primary">
+                <span class="icon">👉</span>
+                <span>Pedir mais informação</span>
+              </button>
+            </a>
+            <span class="cta-note">
+              Receba o PDF explicativo com todos os detalhes técnicos.
+            </span>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="section">
+            <div class="section-label">
+              <span class="icon">🔴</span>
+              <span>O problema</span>
+            </div>
+            <p>
+              Os sistemas tradicionais de aquecimento de água:
+            </p>
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Consomem grandes quantidades de eletricidade.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Contribuem para faturas energéticas elevadas.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Desperdiçam energia térmica sem reaproveitamento.</span>
+              </li>
+            </ul>
+            <p class="note">
+              Grande parte da energia paga transforma-se em calor que não é reutilizado.
+            </p>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="section">
+            <div class="section-label">
+              <span class="icon">💡</span>
+              <span>A solução</span>
+            </div>
+            <p class="section-title">O que é o Superheat H1?</p>
+            <p>
+              O Superheat H1 é um sistema de aquecimento de água que reaproveita o calor gerado por computação associada à mineração de Bitcoin para aquecer água.
+            </p>
+            <p class="note">
+              O foco está no reaproveitamento energético — transformar calor inevitável em utilidade real.
+            </p>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="section">
+            <div class="section-label">
+              <span class="icon">⚙️</span>
+              <span>O que o sistema demonstra</span>
+            </div>
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Aquecimento de água semelhante a um sistema convencional.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Reaproveitamento total do calor gerado pela computação.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Redução potencial do desperdício energético.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Geração de Bitcoin como subproduto técnico do processo.</span>
+              </li>
+            </ul>
+            <p class="note">
+              O Bitcoin não é o objetivo principal, mas sim uma consequência técnica do reaproveitamento do calor.
+            </p>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="section">
+            <div class="section-label">
+              <span class="icon">🔄</span>
+              <span>Como funciona</span>
+            </div>
+            <p class="section-title">1. Instalação</p>
+            <p>O sistema ocupa o lugar de um aquecedor de água tradicional.</p>
+            <p class="section-title" style="margin-top: 8px;">2. Operação</p>
+            <p>A computação gera calor de forma contínua.</p>
+            <p class="section-title" style="margin-top: 8px;">3. Reaproveitamento</p>
+            <p>Esse calor é utilizado diretamente para aquecer a água.</p>
+          </div>
+        </section>
+
+        <aside class="main-right">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="card-title-dot"></span>
+                <span>Estimativas teóricas (indicativas)</span>
+              </div>
+              <div class="card-tag">Modelo conceptual</div>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <tr>
+                  <th>Parâmetro</th>
+                  <td>Valor típico</td>
+                </tr>
+                <tr>
+                  <th>Custo estimado do equipamento</th>
+                  <td>~2.000 USD</td>
+                </tr>
+                <tr>
+                  <th>Geração teórica anual de Bitcoin</th>
+                  <td>até ~1.000 USD</td>
+                </tr>
+                <tr>
+                  <th>Redução potencial do custo energético (água quente)</th>
+                  <td class="table-em">até ~80%</td>
+                </tr>
+              </table>
+              <p class="note" style="margin-top: 8px;">
+                Valores meramente indicativos. Não constituem garantia de desempenho, poupança ou retorno financeiro.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="card-title-dot"></span>
+                <span>Objetivo do projeto</span>
+              </div>
+              <div class="card-tag">Informativo</div>
+            </div>
+            <div class="card-body">
+              <p>
+                Este projeto existe para:
+              </p>
+              <ul class="bullet-list" style="margin-top: 6px;">
+                <li>
+                  <span class="bullet-dot"></span>
+                  <span>Divulgar uma solução alternativa de eficiência energética.</span>
+                </li>
+                <li>
+                  <span class="bullet-dot"></span>
+                  <span>Estudar interesse do público.</span>
+                </li>
+                <li>
+                  <span class="bullet-dot"></span>
+                  <span>Demonstrar reaproveitamento térmico aplicado.</span>
+                </li>
+              </ul>
+              <p class="note">
+                Não existe qualquer atividade comercial associada.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" id="contacto" style="background: linear-gradient(145deg, #0b101f, #06070c);">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="card-title-dot"></span>
+                <span>Contacto</span>
+              </div>
+              <div class="card-tag">Pedido de informação</div>
+            </div>
+            <div class="card-body">
+              <p class="note" style="margin-bottom: 6px;">
+                Para receber informação adicional ou o PDF explicativo:
+              </p>
+              <div class="contacts">
+                <div class="contact-item">
+                  <span class="icon">📱</span>
+                  <span>WhatsApp: +351 9X XXX XXXX</span>
+                </div>
+                <div class="contact-item">
+                  <span class="icon">📧</span>
+                  <span>Email: contacto@superheat.pt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="background: var(--bg-alt);">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="card-title-dot"></span>
+                <span>Nota legal</span>
+              </div>
+              <div class="card-tag">Esclarecimento</div>
+            </div>
+            <div class="card-body">
+              <p class="legal">
+                Este projeto tem caráter exclusivamente informativo.
+                Não constitui proposta comercial, oferta de venda ou solicitação de investimento.
+                As estimativas apresentadas são teóricas e dependem de múltiplos fatores externos, incluindo preço do Bitcoin, custo da eletricidade e padrões de utilização.
+                Esta informação não constitui aconselhamento financeiro, fiscal ou de investimento.
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-small">
+            <span>Superheat H1 · Protótipo conceptual de reaproveitamento térmico.</span>
+            <span>Conteúdo para estudo, demonstração e discussão técnica.</span>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
