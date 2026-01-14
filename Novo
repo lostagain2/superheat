@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Superheat H1 — Reaproveitamento Térmico</title>
+
+<!-- Tipografia -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================================
+   SUPERHEAT H1 — BRANDING OFICIAL
+   Estilo Futurista Térmico + Layout Vertical
+   ================================ */
+
+:root {
+  --bg1: #050609;
+  --bg2: #0a0f1d;
+  --bg3: #111827;
+  --accent-red: #ff3b30;
+  --accent-orange: #ff9f0a;
+  --accent-yellow: #ffcc00;
+  --text: #f7f7f7;
+  --muted: #a3a8b8;
+  --border: rgba(255,255,255,0.06);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --glow-red: rgba(255,59,48,0.22);
+  --glow-yellow: rgba(255,204,0,0.18);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, var(--bg3) 0%, var(--bg1) 70%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container principal */
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 22px 80px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, var(--accent-yellow), var(--accent-orange) 40%, var(--accent-red) 80%);
+  box-shadow: 0 0 18px var(--glow-red);
+}
+
+.header-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Secções */
+.section {
+  margin-bottom: 42px;
+}
+
+.section-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* Cartões */
+.card {
+  background: linear-gradient(145deg, #0b0f1a, #05070c);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 120% 120%, var(--glow-red), transparent 60%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Lista */
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bullet-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-red);
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+/* Tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 400;
+  padding: 6px 0;
+}
+
+.table td {
+  padding: 6px 0;
+  color: var(--accent-yellow);
+  font-weight: 600;
+}
+
+/* Botão */
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+  color: #050609;
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  margin-top: 20px;
+  box-shadow: 0 12px 28px rgba(255,59,48,0.35);
+  transition: 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* Nota legal */
+.legal {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-circle"></div>
+    <div class="header-title">Superheat H1</div>
+  </div>
+
+  <!-- Secção 1 -->
+  <div class="section">
+    <div class="section-label">Introdução</div>
+    <div class="section-title">Reaproveitamento de calor para aquecimento de água</div>
+
+    <p>O Superheat H1 demonstra uma nova abordagem à eficiência energética: utilizar o calor gerado por computação para produzir água quente útil, reduzindo desperdício energético.</p>
+  </div>
+
+  <!-- Secção 2 -->
+  <div class="section">
+    <div class="section-label">Problema</div>
+    <div class="section-title">O desperdício energético dos sistemas tradicionais</div>
+
+    <div class="card">
+      <div class="bullet"><div class="bullet-dot"></div><div>Consumo elevado de eletr
